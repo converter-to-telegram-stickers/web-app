@@ -1,44 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>JPG to PNG</title>
-    <style type="text/css">
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            text-align: center;
-        }
-        .form-control {
-            margin-top: 20px;
-        }
-    </style>
+    <title>Sticker Former</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<section class="convertor">
-    <div class="form-control">
-        <label>JPG Image to convert</label>
+
+    <section class="convertor">
+        <label>JPG Image</label>
         <input type="file" name="image" />
-    </div>
-</section>
+    </section>
 
-<script src="main.js"></script>
-<script>
-    // HTML image file field
-    const imageFileEl = document.querySelector('[name="image"]');
-
-    // Add file change event handler
-    imageFileEl.addEventListener('change', (event) => {
-        const jpgImageFileBlob = event.currentTarget.files[0];
-
-        // Validate
-        if (jpgImageFileBlob.type.match(/image\/jpe?g/i) !== null) {
-            JpgToPngConvertor(jpgImageFileBlob).process();
-        } else {
-            alert('Invalid JPG image file');
-        }
-    }, false);
-</script>
+    <script src="main.js"></script>
 
 </body>
 </html>
