@@ -6,11 +6,15 @@
 </head>
 <body>
 
+    <header>Telegram Sticker File Maker</header>
+
     <section>
+        <label id="input-label">
+            <input id="input" type="file">
+            <span class="text">Select Image</span>
+        </label>
         <canvas id="canvas" width="500px" height="500px" onclick="submit()"></canvas>
     </section>
-    <button id="left" onclick="moveLeft()">Left</button>
-    <button id="right" onclick="moveRight()">Right</button>
 
 <script src="main.js"></script>
 
