@@ -6,9 +6,11 @@
 </head>
 <body>
 
-    <section class="convertor">
-        <label>JPG Image</label>
-        <input type="file" name="image" />
+    <section>
+        <canvas id="canvas"></canvas>
+        <button id="submit" onclick="convert()">Convert</button>
+        <button id="left" onclick="moveLeft()">Left</button>
+        <button id="right" onclick="moveRight()">Right</button>
     </section>
 
     <script src="main.js"></script>
