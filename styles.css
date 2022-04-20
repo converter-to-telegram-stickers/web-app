@@ -43,8 +43,8 @@ section {
     width: 200px;
     height: 50px;
     border: 4px #ffcaca solid;
-    transition: .3s;
     border-radius: 1vh;
+    transition: .3s;
 }
 
 #input-label:hover {
@@ -59,4 +59,11 @@ section {
 .text {
     display: flex;
     margin: auto;
+}
+
+#ball {
+    width: 100px;
+    height: 100px;
+    background-color: black;
+    position: absolute;
 }
