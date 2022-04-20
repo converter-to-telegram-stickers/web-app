@@ -12,56 +12,53 @@ input.onchange = function() {
     image.src = URL.createObjectURL(imageFile);
 };
 
-function draw() {
-    ctx.drawImage(this, 0, 0);
-}
-
-function submit() {
-    const link = document.createElement('a');
-    link.download = 'image.png';
-    link.href = canvas.toDataURL();
-    link.click();
-}
-
-let moveXAmount = 0;
-let moveYAmount = 0;
-let dragging = false;
-let prevX = 0;
-let prevY = 0;
-
-function make_pic() {
-    ctx.clearRect(0, 0, 600, 600);
+function draw(scale, translatePos) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.save();
-
-    ctx.translate(200, 275); // зачем
-    ctx.drawImage(image, -500 / 2 + moveXAmount, -500 / 2 + moveYAmount, image.width, image.height);
+    ctx.translate(translatePos.x, translatePos.y);
+    ctx.scale(scale, scale);
+    ctx.drawImage(image, -250 + translatePos.x, -250 + translatePos.y, image.width, image.height);
+    ctx.fill();
     ctx.restore();
 }
 
-canvas.onmousedown = function() {
-    dragging = true;
-    prevX = 0;
-    prevY = 0;
-}
+const translatePos = {
+    x: canvas.width / 2,
+    y: canvas.height / 2
+};
 
-window.onmouseup = function() {
-    dragging = false;
-    prevX = 0;
-    prevY = 0;
-}
+let scale = 1.0;
+const scaleMultiplier = 0.9;
+const startDragOffset = {};
+let mouseDown = false;
 
-window.onmousemove = function(e) {
-    if (dragging)
-    {
-        if (prevX > 0 || prevY > 0)
-        {
-            moveXAmount += e.pageX - prevX;
-            moveYAmount += e.pageY - prevY;
-            make_pic();
-        }
-        prevX = e.pageX;
-        prevY = e.pageY;
+canvas.onwheel = function(e) {
+    if (e.deltaY < 0) {
+        scale /= scaleMultiplier;
+        draw(scale, translatePos);
+    }
+    else if (e.deltaY > 0) {
+        scale *= scaleMultiplier;
+        draw(scale, translatePos);
     }
 }
 
-make_pic();
+canvas.onmousedown = function(e) {
+    mouseDown = true;
+    startDragOffset.x = e.clientX - translatePos.x;
+    startDragOffset.y = e.clientY - translatePos.y;
+}
+
+canvas.onmouseup = function() {
+    mouseDown = false;
+}
+
+canvas.onmousemove = function(e) {
+    if (mouseDown) {
+        translatePos.x = e.clientX - startDragOffset.x;
+        translatePos.y = e.clientY - startDragOffset.y;
+        draw(scale, translatePos);
+    }
+}
+
+draw(scale, translatePos);

@@ -4,7 +4,7 @@ body {
     padding: 0;
     height: 100vh;
     flex-flow: column;
-    background-color: #ffcaca;
+    background-color: #fb9ec4;
 }
 
 header {
@@ -42,7 +42,7 @@ section {
     margin: auto;
     width: 200px;
     height: 50px;
-    border: 4px #ffcaca solid;
+    border: 4px #fb9ec4 solid;
     border-radius: 1vh;
     transition: .3s;
 }
