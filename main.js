@@ -16,13 +16,32 @@ function download() {
 }
 
 input.onchange = function() {
+    hideInputLabel(this.files[0]);
+};
+
+inputLabel.ondrop = function(e) {
+    e.preventDefault();
+    input.files = e.dataTransfer.files;
+    hideInputLabel(input.files[0]);
+};
+
+inputLabel.ondragover = function(e) {
+    e.preventDefault();
+    this.classList.add('dragover');
+}
+
+inputLabel.ondragleave = function(e) {
+    e.preventDefault();
+    this.classList.remove('dragover');
+}
+
+function hideInputLabel(imageFile) {
     inputLabel.style.display = 'none';
     canvas.style.display = 'flex';
     submit.style.display = 'flex';
-    const imageFile = this.files[0];
     image.onload = draw;
     image.src = URL.createObjectURL(imageFile);
-};
+}
 
 function draw() {
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);

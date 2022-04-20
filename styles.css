@@ -21,6 +21,7 @@ section {
     margin-bottom: 90px;
     box-shadow: 0 0 0 50px #FF75A0;
     border-radius: 40px;
+    cursor: all-scroll;
 }
 
 .block {
@@ -39,7 +40,12 @@ section {
     transition: .3s;
 }
 
+#input-label.dragover {
+    background-color: #95E1D3;
+}
+
 #input-label:hover {
+    cursor: pointer;
     background-color: #95E1D3;
     transition: .3s;
 }
