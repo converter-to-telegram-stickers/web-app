@@ -6,16 +6,18 @@
 </head>
 <body>
 
-    <header>Telegram Sticker File Maker</header>
-
-    <section>
-        <label id="input-label">
-            <input id="input" type="file">
-            <span class="text">Select Image</span>
-        </label>
-        <canvas id="canvas" width="500px" height="500px"></canvas>
-    </section>
-    <button onclick="submit()">Submit</button>
+    <div class="block">
+        <section>
+            <label id="input-label">
+                <input id="input" type="file">
+                <span class="text">Select Image</span>
+            </label>
+            <canvas id="canvas" width="500px" height="500px"></canvas>
+        </section>
+        <button id="submit" onclick="download()">
+            <span class="text">Submit</span>
+        </button>
+    </div>
 
 <script src="main.js"></script>
 

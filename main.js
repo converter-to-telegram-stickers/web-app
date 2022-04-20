@@ -1,31 +1,45 @@
 const canvas = document.getElementById('canvas');
 const input = document.getElementById('input');
 const inputLabel = document.getElementById('input-label');
-const image = new Image();
+const submit = document.getElementById('submit');
 const ctx = canvas.getContext('2d');
+
+const image = new Image();
+const canvasWidth = canvas.width;
+const canvasHeight = canvas.height;
+
+function download() {
+    const link = document.createElement('a');
+    link.download = 'image500x500.png';
+    link.href = canvas.toDataURL();
+    link.click();
+}
 
 input.onchange = function() {
     inputLabel.style.display = 'none';
     canvas.style.display = 'flex';
+    submit.style.display = 'flex';
     const imageFile = this.files[0];
     image.onload = draw;
     image.src = URL.createObjectURL(imageFile);
 };
 
-function draw(scale, translatePos) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+function draw() {
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     ctx.save();
     ctx.translate(translatePos.x, translatePos.y);
     ctx.scale(scale, scale);
-    ctx.drawImage(image, -250 + translatePos.x, -250 + translatePos.y, image.width, image.height);
+    const imageWidth = image.width;
+    const imageHeight = image.height;
+    const centerCoordsX = (canvasWidth - imageWidth) / 2;
+    const centerCoordsY = (canvasHeight - imageHeight) / 2;
+    ctx.drawImage(image, centerCoordsX + translatePos.x,
+        centerCoordsY + translatePos.y, imageWidth, imageHeight);
     ctx.fill();
     ctx.restore();
 }
 
-const translatePos = {
-    x: canvas.width / 2,
-    y: canvas.height / 2
-};
+const translatePos = {x: 0, y: 0};
 
 let scale = 1.0;
 const scaleMultiplier = 0.9;
@@ -49,11 +63,11 @@ canvas.onmousedown = function(e) {
     startDragOffset.y = e.clientY - translatePos.y;
 }
 
-canvas.onmouseup = function() {
+document.onmouseup = function() {
     mouseDown = false;
 }
 
-canvas.onmousemove = function(e) {
+document.onmousemove = function(e) {
     if (mouseDown) {
         translatePos.x = e.clientX - startDragOffset.x;
         translatePos.y = e.clientY - startDragOffset.y;
