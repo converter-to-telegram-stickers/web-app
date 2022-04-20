@@ -35,6 +35,11 @@ inputLabel.ondragleave = function(e) {
     this.classList.remove('dragover');
 }
 
+document.onpaste = function(e){
+    const file = e.clipboardData.items[0].getAsFile();
+    hideInputLabel(file);
+}
+
 function hideInputLabel(imageFile) {
     inputLabel.style.display = 'none';
     canvas.style.display = 'flex';
@@ -59,7 +64,6 @@ function draw() {
 }
 
 const translatePos = {x: 0, y: 0};
-
 let scale = 1.0;
 const scaleMultiplier = 0.9;
 const startDragOffset = {};

@@ -72,6 +72,13 @@ section {
     border: 0;
     background-color: #FF75A0;
     border-radius: 15px;
+    transition: .3s;
+}
+
+#submit:hover {
+    cursor: pointer;
+    background-color: #95E1D3;
+    transition: .3s;
 }
 
 .text {
