@@ -1,7 +1,7 @@
 # Telegram Sticker File Maker (TSFL)
  Проект по курсу «Основы веб-разработки», ФИИТ-203. Команда: Михаил Ланец, Диляра Фатыхова, Алексей Соколков, Мария Драпкина  
 
-## [(⊙_⊙) Рабочий сайт](https://converter-to-telegram-stickers.github.io/)
+## <a href="https://converter-to-telegram-stickers.github.io/" target="_blank">(⊙_⊙) Рабочий сайт</a>  
 
 ## TODO
 - В канвасе не должно быть пустых мест
