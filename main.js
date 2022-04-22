@@ -57,8 +57,8 @@ function draw() {
     const imageHeight = image.height;
     const centerCoordsX = (canvasWidth - imageWidth) / 2;
     const centerCoordsY = (canvasHeight - imageHeight) / 2;
-    ctx.drawImage(image, centerCoordsX + translatePos.x,
-        centerCoordsY + translatePos.y, imageWidth, imageHeight);
+    ctx.drawImage(image, (centerCoordsX + translatePos.x) / (scale * 2),
+        (centerCoordsY + translatePos.y) / (scale * 2), imageWidth, imageHeight);
     ctx.fill();
     ctx.restore();
 }
@@ -66,7 +66,7 @@ function draw() {
 const translatePos = {x: 0, y: 0};
 let scale = 1.0;
 const scaleMultiplier = 0.9;
-const startDragOffset = {};
+const startDragOffset = {x: 0, y: 0};
 let mouseDown = false;
 
 canvas.onwheel = function(e) {
@@ -94,8 +94,8 @@ document.onmousemove = function(e) {
     if (mouseDown) {
         translatePos.x = e.clientX - startDragOffset.x;
         translatePos.y = e.clientY - startDragOffset.y;
-        draw(scale, translatePos);
+        draw();
     }
 }
 
-draw(scale, translatePos);
+draw();
