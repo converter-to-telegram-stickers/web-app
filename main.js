@@ -70,14 +70,11 @@ const startDragOffset = {x: 0, y: 0};
 let mouseDown = false;
 
 canvas.onwheel = function(e) {
-    if (e.deltaY < 0) {
+    if (e.deltaY < 0)
         scale /= scaleMultiplier;
-        draw(scale, translatePos);
-    }
-    else if (e.deltaY > 0) {
+    else
         scale *= scaleMultiplier;
-        draw(scale, translatePos);
-    }
+    draw();
 }
 
 canvas.onmousedown = function(e) {

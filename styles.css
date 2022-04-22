@@ -1,10 +1,17 @@
+/* Палитра:   */
+/*  #524A4E   */
+/*  #FDEFF4   */
+/*  #FFC0D3   */
+/*  #EAFFD0   */
+/*  #95E1D3   */
+
 body {
     display: flex;
     margin: 0;
     padding: 0;
     height: 100vh;
     flex-flow: column;
-    background-color: #EAFFD0;
+    background-color: #FFC0D3;
 }
 
 header {
@@ -19,7 +26,7 @@ section {
     width: 350px;
     height: 350px;
     margin-bottom: 90px;
-    box-shadow: 0 0 0 50px #FF75A0;
+    box-shadow: 0 0 0 50px #524A4E;
     border-radius: 40px;
 }
 
@@ -39,7 +46,7 @@ section:active {
     width: 100%;
     height: 100%;
     border-radius: 40px;
-    background-color: #EAFFD0;
+    background-color: #FFC0D3;
     transition: .3s;
 }
 
@@ -73,8 +80,8 @@ section:active {
     width: 175px;
     height: 60px;
     border: 0;
-    background-color: #FF75A0;
-    border-radius: 15px;
+    background-color: #524A4E;
+    border-radius: 18px;
     transition: .3s;
 }
 
@@ -87,7 +94,16 @@ section:active {
 .text {
     display: flex;
     margin: auto;
+}
+
+.text-type-1 {
     font-family: "Montserrat Medium", sans-serif;
-    color: #000;
+    color: #524A4E;
+    font-size: 30px;
+}
+
+.text-type-2 {
+    font-family: "Montserrat Medium", sans-serif;
+    color: #FDEFF4;
     font-size: 30px;
 }
