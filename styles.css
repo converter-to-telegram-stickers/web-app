@@ -1,21 +1,26 @@
 body, html {
+    display: flex;
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
 }
 
+.container {
+    display: grid;
+    margin: auto;
+}
+
 .image {
-    display: block;
-    margin: auto auto;
-    background: #fff;
-    max-width: 60%;
-    max-height: 600px;
+    grid-column: 1;
+    grid-row: 1;
+    width: 600px;
+    height: 600px;
 }
 
 .canvas {
-    display: block;
-    max-width: 60%;
-    max-height: 600px;
-    position: absolute;
+    grid-column: 1;
+    grid-row: 1;
+    width: 600px;
+    height: 600px;
 }

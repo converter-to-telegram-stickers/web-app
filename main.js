@@ -1,12 +1,8 @@
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-
-canvas.addEventListener("mousedown", e => { MouseDown(e); });
-canvas.addEventListener("mousemove", e => { MouseMove(e); });
-document.addEventListener("mouseup", e => { MouseUp(e); });
-
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const image = document.getElementById('image');
 const selection = {
-    mDown: false,
+    dragging: false,
     x: 0,
     y: 0,
     top: 50,
@@ -15,46 +11,31 @@ const selection = {
     height: 512
 };
 
-const image = document.getElementById("image");
+canvas.onmousedown = (e) => {
+    e.preventDefault();
+    selection.dragging = true;
+};
+document.onmousemove = (e) => MouseMove(e);
+document.onmouseup = () => { selection.dragging = false; };
 
-image.addEventListener("load", Init);
+image.onload = Init;
+image.src = 'image.jpg';
 
-image.src = "image.jpg";
-
-window.addEventListener("resize", Init);
-
-function Init()
-{
+function Init() {
     canvas.width = image.width;
     canvas.height = image.height;
-
-    canvas.setAttribute("style", "top: " + (image.offsetTop + 5) + "px; left: " + (image.offsetLeft + 5) + "px;");
-
     DrawSelection();
 }
 
-
-function MouseDown() {
-    selection.mDown = true;
-}
-
 function MouseMove(e) {
-    if (selection.mDown) {
+    if (selection.dragging) {
         selection.x = e.clientX - canvas.offsetLeft;
         selection.y = e.clientY - canvas.offsetTop;
         selection.left = selection.x - selection.width / 2;
         selection.top = selection.y - selection.height / 2;
         CheckSelection();
-        Update();
+        DrawSelection();
     }
-}
-
-function MouseUp() {
-    selection.mDown = false;
-}
-
-function Update() {
-    DrawSelection();
 }
 
 function DrawSelection() {
@@ -65,12 +46,6 @@ function DrawSelection() {
 }
 
 function CheckSelection() {
-    if (selection.width < 100)
-        selection.width = 100;
-
-    if (selection.height < 100)
-        selection.height = 100;
-
     if (selection.width > canvas.width)
         selection.width = canvas.width;
 
