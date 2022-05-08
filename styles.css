@@ -1,109 +1,21 @@
-/* Палитра:   */
-/*  #524A4E   */
-/*  #FDEFF4   */
-/*  #FFC0D3   */
-/*  #EAFFD0   */
-/*  #95E1D3   */
-
-body {
-    display: flex;
+body, html {
+    width: 100%;
+    height: 100%;
     margin: 0;
     padding: 0;
-    height: 100vh;
-    flex-flow: column;
-    background-color: #FFC0D3;
 }
 
-header {
-    display: flex;
-    margin: auto;
-    font-size: 50px;
-}
-
-section {
-    z-index: 500;
-    display: flex;
-    width: 350px;
-    height: 350px;
-    margin-bottom: 90px;
-    box-shadow: 0 0 0 50px #524A4E;
-    border-radius: 40px;
-}
-
-section:active {
-    cursor: all-scroll;
-}
-
-.block {
+.image {
     display: block;
-    margin: auto;
+    margin: auto auto;
+    background: #fff;
+    max-width: 60%;
+    max-height: 600px;
 }
 
-#input-label {
-    z-index: 499;
-    display: flex;
-    margin: auto;
-    width: 100%;
-    height: 100%;
-    border-radius: 40px;
-    background-color: #FFC0D3;
-    transition: .3s;
-}
-
-#input-label.dragover {
-    background-color: #95E1D3;
-}
-
-#input-label:hover {
-    cursor: pointer;
-    background-color: #95E1D3;
-    transition: .3s;
-}
-
-#input-label > #input {
-    display: none;
-}
-
-#canvas {
-    display: none;
-    margin: auto;
-    width: 100%;
-    height: 100%;
-    border-radius: 40px;
-}
-
-#submit {
-    display: none;
+.canvas {
+    display: block;
+    max-width: 60%;
+    max-height: 600px;
     position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0);
-    width: 175px;
-    height: 60px;
-    border: 0;
-    background-color: #524A4E;
-    border-radius: 18px;
-    transition: .3s;
-}
-
-#submit:hover {
-    cursor: pointer;
-    background-color: #95E1D3;
-    transition: .3s;
-}
-
-.text {
-    display: flex;
-    margin: auto;
-}
-
-.text-type-1 {
-    font-family: "Montserrat Medium", sans-serif;
-    color: #524A4E;
-    font-size: 30px;
-}
-
-.text-type-2 {
-    font-family: "Montserrat Medium", sans-serif;
-    color: #FDEFF4;
-    font-size: 30px;
 }

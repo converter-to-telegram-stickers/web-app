@@ -1,104 +1,91 @@
-const canvas = document.getElementById('canvas');
-const input = document.getElementById('input');
-const inputLabel = document.getElementById('input-label');
-const submit = document.getElementById('submit');
-const ctx = canvas.getContext('2d');
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
 
-const image = new Image();
-const canvasWidth = canvas.width;
-const canvasHeight = canvas.height;
+canvas.addEventListener("mousedown", e => { MouseDown(e); });
+canvas.addEventListener("mousemove", e => { MouseMove(e); });
+document.addEventListener("mouseup", e => { MouseUp(e); });
 
-const translatePos = {x: 0, y: 0};
-let scale = 1.0;
-const scaleMultiplier = 0.9;
-const startDragOffset = {x: 0, y: 0};
-let mouseDown = false;
+const selection = {
+    mDown: false,
+    x: 0,
+    y: 0,
+    top: 50,
+    left: 50,
+    width: 512,
+    height: 512
+};
 
-function download() {
-    const link = document.createElement('a');
-    link.download = 'image512x512.png';
-    link.href = canvas.toDataURL();
-    link.click();
+const image = document.getElementById("image");
+
+image.addEventListener("load", Init);
+
+image.src = "image.jpg";
+
+window.addEventListener("resize", Init);
+
+function Init()
+{
+    canvas.width = image.width;
+    canvas.height = image.height;
+
+    canvas.setAttribute("style", "top: " + (image.offsetTop + 5) + "px; left: " + (image.offsetLeft + 5) + "px;");
+
+    DrawSelection();
 }
 
-function hideInputLabel(imageFile) {
-    if (imageFile.name.includes('png') ||
-        imageFile.name.includes('jpg') ||
-        imageFile.name.includes('jpeg')) {
-        inputLabel.style.display = 'none';
-        canvas.style.display = 'flex';
-        submit.style.display = 'flex';
-        image.onload = draw;
-        image.src = URL.createObjectURL(imageFile);
+
+function MouseDown() {
+    selection.mDown = true;
+}
+
+function MouseMove(e) {
+    if (selection.mDown) {
+        selection.x = e.clientX - canvas.offsetLeft;
+        selection.y = e.clientY - canvas.offsetTop;
+        selection.left = selection.x - selection.width / 2;
+        selection.top = selection.y - selection.height / 2;
+        CheckSelection();
+        Update();
     }
-    else
-        alert('Wrong file type. Try again.');
 }
 
-function draw() {
-    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-    ctx.save();
-    ctx.translate(translatePos.x, translatePos.y);
-    ctx.scale(scale, scale);
-    const imageWidth = image.width;
-    const imageHeight = image.height;
-    const centerCoordsX = (canvasWidth - imageWidth) / 2;
-    const centerCoordsY = (canvasHeight - imageHeight) / 2;
-    ctx.drawImage(image, (centerCoordsX + translatePos.x) / (scale * 2),
-        (centerCoordsY + translatePos.y) / (scale * 2), imageWidth, imageHeight);
-    ctx.fill();
-    ctx.restore();
+function MouseUp() {
+    selection.mDown = false;
 }
 
-input.onchange = function() {
-    hideInputLabel(this.files[0]);
-};
+function Update() {
+    DrawSelection();
+}
 
-inputLabel.ondrop = function(e) {
-    e.preventDefault();
-    input.files = e.dataTransfer.files;
-    hideInputLabel(input.files[0]);
-};
+function DrawSelection() {
+    ctx.fillStyle = 'rgba(0,0,0,0.5)';
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(selection.left, selection.top, selection.width, selection.height);
+}
 
-inputLabel.ondragover = function(e) {
-    e.preventDefault();
-    this.classList.add('dragover');
-};
+function CheckSelection() {
+    if (selection.width < 100)
+        selection.width = 100;
 
-inputLabel.ondragleave = function(e) {
-    e.preventDefault();
-    this.classList.remove('dragover');
-};
+    if (selection.height < 100)
+        selection.height = 100;
 
-document.onpaste = function(e){
-    const file = e.clipboardData.items[0].getAsFile();
-    hideInputLabel(file);
-};
+    if (selection.width > canvas.width)
+        selection.width = canvas.width;
 
-canvas.onwheel = function(e) {
-    if (e.deltaY < 0)
-        scale /= scaleMultiplier;
-    else
-        scale *= scaleMultiplier;
-    draw();
-};
+    if (selection.height > canvas.height)
+        selection.height = canvas.height;
 
-canvas.onmousedown = function(e) {
-    mouseDown = true;
-    startDragOffset.x = e.clientX - translatePos.x;
-    startDragOffset.y = e.clientY - translatePos.y;
-};
+    if (selection.left < 0)
+        selection.left = 0;
 
-document.onmouseup = function() {
-    mouseDown = false;
-};
+    if (selection.top < 0)
+        selection.top = 0;
 
-document.onmousemove = function(e) {
-    if (mouseDown) {
-        translatePos.x = e.clientX - startDragOffset.x;
-        translatePos.y = e.clientY - startDragOffset.y;
-        draw();
-    }
-};
+    if (selection.left > canvas.width - selection.width)
+        selection.left = canvas.width - selection.width;
 
-draw();
+    if (selection.top > canvas.height - selection.height)
+        selection.top = canvas.height - selection.height;
+}

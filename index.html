@@ -1,25 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <title>Sticker Former</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>JS Avatar Editor</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 
-<div class="block">
-    <section>
-        <label id="input-label">
-            <input id="input" type="file">
-            <span class="text text-type-1">Choose image<br>or drag it here</span>
-        </label>
-        <canvas id="canvas" width="512px" height="512px"></canvas>
-    </section>
-    <button id="submit" onclick="download()">
-        <span class="text text-type-2">Submit</span>
-    </button>
-</div>
+    <div class="container">
+        <div class="avatar">
+            <img id="image" class="image" alt="">
+            <canvas id="canvas" class="canvas"></canvas>
+        </div>
+    </div>
 
-<script src="main.js"></script>
-
+<script type="text/javascript" src="main.js"></script>
 </body>
 </html>
