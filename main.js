@@ -44,6 +44,7 @@ function draw() {
     const imageHeight = image.height;
     const centerCoordsX = (canvasWidth - imageWidth) / 2;
     const centerCoordsY = (canvasHeight - imageHeight) / 2;
+
     ctx.drawImage(image, (centerCoordsX + translatePos.x) / (scale * 2),
         (centerCoordsY + translatePos.y) / (scale * 2), imageWidth, imageHeight);
     ctx.fill();
@@ -97,6 +98,7 @@ document.onmousemove = function(e) {
     if (mouseDown) {
         translatePos.x = e.clientX - startDragOffset.x;
         translatePos.y = e.clientY - startDragOffset.y;
+        checkSelection();
         draw();
     }
 };
