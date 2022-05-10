@@ -117,10 +117,18 @@ section {
         height: 700px;
         margin-bottom: 60px;
     }
+
     #submit {
         width: 275px;
         height: 80px;
     }
+
+    .text-type-1 {
+        font-family: "Montserrat Medium", sans-serif;
+        color: #524A4E;
+        font-size: 55px;
+    }
+
     .text-type-2 {
         font-family: "Montserrat Medium", sans-serif;
         color: #FDEFF4;
