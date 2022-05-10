@@ -21,7 +21,12 @@ canvas.addEventListener('mousemove', mouseEvent, {passive: true});
 canvas.addEventListener('mousedown', mouseEvent, {passive: true});
 canvas.addEventListener('mouseup', mouseEvent, {passive: true});
 canvas.addEventListener('mouseout', mouseEvent, {passive: true});
+
 canvas.addEventListener('wheel', mouseWheelEvent, {passive: false});
+
+canvas.addEventListener('touchstart', mouseEvent);
+canvas.addEventListener('touchmove', mouseEvent);
+canvas.addEventListener('touchend', mouseEvent);
 
 function update() {
     dirty = false;
@@ -53,18 +58,18 @@ function drawCanvas() {
         ctx.setTransform(matrix[0], matrix[1], matrix[2], matrix[3], matrix[4], matrix[5]);
         ctx.drawImage(image, 0, 0);
         ctx.resetTransform();
-        ctx.font = '48px sans-serif';
+        ctx.font = 'bold 48px sans-serif';
         ctx.fillStyle = '#000';
         ctx.textAlign = 'center';
-        ctx.fillText(text, canvas.width / 2, canvas.height - 50);
+        ctx.fillText(text, canvas.width / 2, canvas.height - 40);
     }
     requestAnimationFrame(drawCanvas);
 }
 
 function mouseEvent(e) {
-    if (e.type === 'mousedown')
+    if (e.type === 'mousedown' || e.type === 'touchstart')
         mouse.dragging = true;
-    if (e.type === 'mouseup' || e.type === 'mouseout')
+    if (e.type === 'mouseup' || e.type === 'mouseout' || e.type === 'touchend')
         mouse.dragging = false;
     mouse.oldX = mouse.x;
     mouse.oldY = mouse.y;
