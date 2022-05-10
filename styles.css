@@ -110,3 +110,20 @@ section {
     color: #FDEFF4;
     font-size: 30px;
 }
+
+@media only screen and (max-width: 1000px) {
+    .block {
+        width: 700px;
+        height: 700px;
+        margin-bottom: 60px;
+    }
+    #submit {
+        width: 275px;
+        height: 80px;
+    }
+    .text-type-2 {
+        font-family: "Montserrat Medium", sans-serif;
+        color: #FDEFF4;
+        font-size: 40px;
+    }
+}
