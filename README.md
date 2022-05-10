@@ -3,4 +3,4 @@
 
 ## [(⊙_⊙) Рабочий сайт](https://converter-to-telegram-stickers.github.io/)  
 
-[Image](readme.png)
+![Image](readme.png)
