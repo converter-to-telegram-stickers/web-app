@@ -1,54 +1,86 @@
 const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext("2d");
 const input = document.getElementById('input');
 const inputLabel = document.getElementById('input-label');
 const submit = document.getElementById('submit');
-const ctx = canvas.getContext('2d');
-
 const image = new Image();
-const canvasWidth = canvas.width;
-const canvasHeight = canvas.height;
 
-const translatePos = {x: 0, y: 0};
-let scale = 1.0;
-const scaleMultiplier = 0.9;
-const startDragOffset = {x: 0, y: 0};
-let mouseDown = false;
+requestAnimationFrame(drawCanvas);
 
-function download() {
-    const link = document.createElement('a');
-    link.download = 'image512x512.png';
-    link.href = canvas.toDataURL();
-    link.click();
+let matrix = [1, 0, 0, 1, 0, 0];
+let scale = 1;
+const pos = { x: 0, y: 0 };
+let dirty = true;
+const mouse = {x: 0, y: 0, oldX: 0, oldY: 0, dragging: false};
+
+canvas.addEventListener("mousemove", mouseEvent, {passive: true});
+canvas.addEventListener("mousedown", mouseEvent, {passive: true});
+canvas.addEventListener("mouseup", mouseEvent, {passive: true});
+canvas.addEventListener("mouseout", mouseEvent, {passive: true});
+canvas.addEventListener("wheel", mouseWheelEvent, {passive: false});
+
+function apply() {
+    if (dirty)
+        update();
+    ctx.setTransform(matrix[0], matrix[1], matrix[2], matrix[3], matrix[4], matrix[5]);
 }
 
-function hideInputLabel(imageFile) {
-    if (imageFile.name.includes('png') ||
-        imageFile.name.includes('jpg') ||
-        imageFile.name.includes('jpeg')) {
-        inputLabel.style.display = 'none';
-        canvas.style.display = 'flex';
-        submit.style.display = 'flex';
-        image.onload = draw;
-        image.src = URL.createObjectURL(imageFile);
+function update() {
+    dirty = false;
+    matrix[3] = matrix[0] = scale;
+    matrix[2] = matrix[1] = 0;
+    matrix[4] = pos.x;
+    matrix[5] = pos.y;
+}
+
+function pan(amount) {
+    if (dirty)
+        update();
+    pos.x += amount.x;
+    pos.y += amount.y;
+    dirty = true;
+}
+
+function scaleAt(at, amount) {
+    if (dirty)
+        update();
+    scale *= amount;
+    pos.x = at.x - (at.x - pos.x) * amount;
+    pos.y = at.y - (at.y - pos.y) * amount;
+    dirty = true;
+}
+
+function drawCanvas() {
+    if (dirty) {
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        apply();
+        ctx.drawImage(image, 0, 0);
     }
-    else
-        alert('Wrong file type. Try again.');
+    requestAnimationFrame(drawCanvas);
 }
 
-function draw() {
-    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-    ctx.save();
-    ctx.translate(translatePos.x, translatePos.y);
-    ctx.scale(scale, scale);
-    const imageWidth = image.width;
-    const imageHeight = image.height;
-    const centerCoordsX = (canvasWidth - imageWidth) / 2;
-    const centerCoordsY = (canvasHeight - imageHeight) / 2;
+function mouseEvent(e) {
+    if (e.type === "mousedown")
+        mouse.dragging = true;
+    if (e.type === "mouseup" || e.type === "mouseout")
+        mouse.dragging = false;
+    mouse.oldX = mouse.x;
+    mouse.oldY = mouse.y;
+    mouse.x = e.offsetX;
+    mouse.y = e.offsetY
+    if (mouse.dragging)
+        pan({x: mouse.x - mouse.oldX, y: mouse.y - mouse.oldY});
+}
 
-    ctx.drawImage(image, (centerCoordsX + translatePos.x) / (scale * 2),
-        (centerCoordsY + translatePos.y) / (scale * 2), imageWidth, imageHeight);
-    ctx.fill();
-    ctx.restore();
+function mouseWheelEvent(e) {
+    let x = e.offsetX;
+    let y = e.offsetY;
+    if (e.deltaY < 0)
+        scaleAt({x, y}, 1.1);
+    else
+        scaleAt({x, y}, 1 / 1.1);
+    e.preventDefault();
 }
 
 input.onchange = function() {
@@ -76,31 +108,26 @@ document.onpaste = function(e){
     hideInputLabel(file);
 };
 
-canvas.onwheel = function(e) {
-    if (e.deltaY < 0)
-        scale /= scaleMultiplier;
-    else
-        scale *= scaleMultiplier;
-    draw();
-};
 
-canvas.onmousedown = function(e) {
-    mouseDown = true;
-    startDragOffset.x = e.clientX - translatePos.x;
-    startDragOffset.y = e.clientY - translatePos.y;
-};
+function download() {
+    const link = document.createElement('a');
+    link.download = 'image512x512.png';
+    link.href = canvas.toDataURL();
+    link.click();
+}
 
-document.onmouseup = function() {
-    mouseDown = false;
-};
-
-document.onmousemove = function(e) {
-    if (mouseDown) {
-        translatePos.x = e.clientX - startDragOffset.x;
-        translatePos.y = e.clientY - startDragOffset.y;
-        checkSelection();
-        draw();
+function hideInputLabel(imageFile) {
+    if (imageFile.name.includes('png') ||
+        imageFile.name.includes('jpg') ||
+        imageFile.name.includes('jpeg')) {
+        inputLabel.style.display = 'none';
+        canvas.style.display = 'flex';
+        submit.style.display = 'flex';
+        image.onload = function() {
+            ctx.drawImage(image, 0, 0);
+        };
+        image.src = URL.createObjectURL(imageFile);
     }
-};
-
-draw();
+    else
+        alert('Wrong file type. Try again.');
+}
