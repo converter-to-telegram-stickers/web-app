@@ -16,9 +16,15 @@
             <canvas id="canvas" width="512px" height="521px"></canvas>
         </div>
     </div>
-    <button id="submit" onclick="download()">
-        <span class="text text-type-2">Submit</span>
-    </button>
+    <div id="buttons">
+        <button id="submit" onclick="download()">
+            <span class="text text-type-2">Submit</span>
+        </button>
+        <label><input id="input-color" type="color" title="Change background color"></label>
+        <button id="reload" onclick="document.location.reload();">
+            <img class="reload-i" src="icons/reload.png" alt="">
+        </button>
+    </div>
 </section>
 
 <script src="main.js"></script>

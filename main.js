@@ -1,8 +1,9 @@
 const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext("2d");
-const input = document.getElementById('input');
+const ctx = canvas.getContext('2d');
+const inputImage = document.getElementById('input');
 const inputLabel = document.getElementById('input-label');
-const submit = document.getElementById('submit');
+const inputColor = document.getElementById('input-color');
+const buttons = document.getElementById('buttons');
 const image = new Image();
 
 requestAnimationFrame(drawCanvas);
@@ -12,12 +13,13 @@ let scale = 1;
 const pos = { x: 0, y: 0 };
 let dirty = true;
 const mouse = {x: 0, y: 0, oldX: 0, oldY: 0, dragging: false};
+let bgColor = null;
 
-canvas.addEventListener("mousemove", mouseEvent, {passive: true});
-canvas.addEventListener("mousedown", mouseEvent, {passive: true});
-canvas.addEventListener("mouseup", mouseEvent, {passive: true});
-canvas.addEventListener("mouseout", mouseEvent, {passive: true});
-canvas.addEventListener("wheel", mouseWheelEvent, {passive: false});
+canvas.addEventListener('mousemove', mouseEvent, {passive: true});
+canvas.addEventListener('mousedown', mouseEvent, {passive: true});
+canvas.addEventListener('mouseup', mouseEvent, {passive: true});
+canvas.addEventListener('mouseout', mouseEvent, {passive: true});
+canvas.addEventListener('wheel', mouseWheelEvent, {passive: false});
 
 function apply() {
     if (dirty)
@@ -31,6 +33,10 @@ function update() {
     matrix[2] = matrix[1] = 0;
     matrix[4] = pos.x;
     matrix[5] = pos.y;
+    if (bgColor !== null) {
+        ctx.fillStyle = bgColor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
 }
 
 function pan(amount) {
@@ -61,9 +67,9 @@ function drawCanvas() {
 }
 
 function mouseEvent(e) {
-    if (e.type === "mousedown")
+    if (e.type === 'mousedown')
         mouse.dragging = true;
-    if (e.type === "mouseup" || e.type === "mouseout")
+    if (e.type === 'mouseup' || e.type === 'mouseout')
         mouse.dragging = false;
     mouse.oldX = mouse.x;
     mouse.oldY = mouse.y;
@@ -78,19 +84,26 @@ function mouseWheelEvent(e) {
     let y = e.offsetY;
     if (e.deltaY < 0)
         scaleAt({x, y}, 1.1);
-    else
+    else {
+        if (scale < 0.04)
+            scale = 0.04;
         scaleAt({x, y}, 1 / 1.1);
+    }
     e.preventDefault();
 }
 
-input.onchange = function() {
+inputImage.onchange = function() {
     hideInputLabel(this.files[0]);
+};
+
+inputColor.onchange = function(e) {
+    bgColor = e.target.value;
 };
 
 inputLabel.ondrop = function(e) {
     e.preventDefault();
-    input.files = e.dataTransfer.files;
-    hideInputLabel(input.files[0]);
+    inputImage.files = e.dataTransfer.files;
+    hideInputLabel(inputImage.files[0]);
 };
 
 inputLabel.ondragover = function(e) {
@@ -108,7 +121,6 @@ document.onpaste = function(e){
     hideInputLabel(file);
 };
 
-
 function download() {
     const link = document.createElement('a');
     link.download = 'image512x512.png';
@@ -122,9 +134,10 @@ function hideInputLabel(imageFile) {
         imageFile.name.includes('jpeg')) {
         inputLabel.style.display = 'none';
         canvas.style.display = 'flex';
-        submit.style.display = 'flex';
+        buttons.style.display = 'flex';
         image.onload = function() {
             ctx.drawImage(image, 0, 0);
+            canvas.elementFromPoint(0, 0).click();
         };
         image.src = URL.createObjectURL(imageFile);
     }
