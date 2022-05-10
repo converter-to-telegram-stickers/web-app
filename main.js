@@ -3,6 +3,7 @@ const ctx = canvas.getContext('2d');
 const inputImage = document.getElementById('input');
 const inputLabel = document.getElementById('input-label');
 const inputColor = document.getElementById('input-color');
+const inputText = document.getElementById('input-text');
 const buttons = document.getElementById('buttons');
 const image = new Image();
 
@@ -14,21 +15,13 @@ const pos = { x: 0, y: 0 };
 let dirty = true;
 const mouse = {x: 0, y: 0, oldX: 0, oldY: 0, dragging: false};
 let bgColor = null;
-
-let x = 0;
-let y = 0;
+let text = '';
 
 canvas.addEventListener('mousemove', mouseEvent, {passive: true});
 canvas.addEventListener('mousedown', mouseEvent, {passive: true});
 canvas.addEventListener('mouseup', mouseEvent, {passive: true});
 canvas.addEventListener('mouseout', mouseEvent, {passive: true});
 canvas.addEventListener('wheel', mouseWheelEvent, {passive: false});
-
-function apply() {
-    if (dirty)
-        update();
-    ctx.setTransform(matrix[0], matrix[1], matrix[2], matrix[3], matrix[4], matrix[5]);
-}
 
 function update() {
     dirty = false;
@@ -40,14 +33,6 @@ function update() {
         ctx.fillStyle = bgColor;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
-}
-
-function pan(amount) {
-    if (dirty)
-        update();
-    pos.x += amount.x;
-    pos.y += amount.y;
-    dirty = true;
 }
 
 function scaleAt(at, amount) {
@@ -63,8 +48,15 @@ function drawCanvas() {
     if (dirty) {
         ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        apply();
+        if (dirty)
+            update();
+        ctx.setTransform(matrix[0], matrix[1], matrix[2], matrix[3], matrix[4], matrix[5]);
         ctx.drawImage(image, 0, 0);
+        ctx.resetTransform();
+        ctx.font = '48px sans-serif';
+        ctx.fillStyle = '#000';
+        ctx.textAlign = 'center';
+        ctx.fillText(text, canvas.width / 2, canvas.height - 50);
     }
     requestAnimationFrame(drawCanvas);
 }
@@ -78,13 +70,18 @@ function mouseEvent(e) {
     mouse.oldY = mouse.y;
     mouse.x = e.offsetX;
     mouse.y = e.offsetY
-    if (mouse.dragging)
-        pan({x: mouse.x - mouse.oldX, y: mouse.y - mouse.oldY});
+    if (mouse.dragging) {
+        if (dirty)
+            update();
+        pos.x += mouse.x - mouse.oldX;
+        pos.y += mouse.y - mouse.oldY;
+        dirty = true;
+    }
 }
 
 function mouseWheelEvent(e) {
-    x = e.offsetX;
-    y = e.offsetY;
+    const x = e.offsetX;
+    const y = e.offsetY;
     if (e.deltaY < 0)
         scaleAt({x, y}, 1.1);
     else {
@@ -101,7 +98,16 @@ inputImage.onchange = function() {
 
 inputColor.onchange = function(e) {
     bgColor = e.target.value;
-    scaleAt({x, y}, 1);
+    if (dirty)
+        update();
+    dirty = true;
+};
+
+inputText.oninput = function(e) {
+    text = e.target.value;
+    if (dirty)
+        update();
+    dirty = true;
 };
 
 inputLabel.ondrop = function(e) {

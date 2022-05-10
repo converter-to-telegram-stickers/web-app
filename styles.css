@@ -74,8 +74,11 @@ section {
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
-    width: 350px;
-    justify-content: space-between;
+}
+
+.b-e {
+    height: 55px;
+    margin: auto 10px;
 }
 
 button {
@@ -94,12 +97,11 @@ button:hover {
 
 #submit {
     width: 175px;
-    height: 60px;
 }
 
 #input-color {
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 100%;
     border: none;
     background-color: #524A4E;
     transition: .3s;
@@ -112,14 +114,25 @@ button:hover {
 }
 
 #reload {
-    width: 60px;
-    height: 60px;
+    width: 55px;
 }
 
 .reload-i {
     margin: auto;
     width: 40px;
     height: 40px;
+}
+
+#input-text {
+    width: 175px;
+    height: 100%;
+    border: none;
+    outline: 0;
+    padding: 0;
+    margin: 0;
+    font-size: 24px;
+    font-family: "Montserrat Medium", sans-serif;
+    color: #524A4E;
 }
 
 .text {
