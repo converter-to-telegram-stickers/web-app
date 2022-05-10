@@ -1,17 +1,10 @@
-/* Палитра:   */
-/*  #524A4E   */
-/*  #FDEFF4   */
-/*  #FFC0D3   */
-/*  #EAFFD0   */
-/*  #95E1D3   */
-
 body {
     display: flex;
     margin: 0;
     padding: 0;
     height: 100vh;
     flex-flow: column;
-    background-color: #FFC0D3;
+    background-color: #f8adc3;
 }
 
 header {
@@ -43,7 +36,7 @@ section {
     margin: auto;
     width: 80%;
     height: 80%;
-    background-color: #FFC0D3;
+    background-color: #f8adc3;
 }
 
 #input-label {
@@ -109,6 +102,13 @@ button:hover {
     height: 60px;
     border: none;
     background-color: #524A4E;
+    transition: .3s;
+}
+
+#input-color:hover {
+    cursor: pointer;
+    background-color: #95E1D3;
+    transition: .3s;
 }
 
 #reload {

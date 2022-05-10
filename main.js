@@ -15,6 +15,9 @@ let dirty = true;
 const mouse = {x: 0, y: 0, oldX: 0, oldY: 0, dragging: false};
 let bgColor = null;
 
+let x = 0;
+let y = 0;
+
 canvas.addEventListener('mousemove', mouseEvent, {passive: true});
 canvas.addEventListener('mousedown', mouseEvent, {passive: true});
 canvas.addEventListener('mouseup', mouseEvent, {passive: true});
@@ -80,8 +83,8 @@ function mouseEvent(e) {
 }
 
 function mouseWheelEvent(e) {
-    let x = e.offsetX;
-    let y = e.offsetY;
+    x = e.offsetX;
+    y = e.offsetY;
     if (e.deltaY < 0)
         scaleAt({x, y}, 1.1);
     else {
@@ -98,6 +101,7 @@ inputImage.onchange = function() {
 
 inputColor.onchange = function(e) {
     bgColor = e.target.value;
+    scaleAt({x, y}, 1);
 };
 
 inputLabel.ondrop = function(e) {
