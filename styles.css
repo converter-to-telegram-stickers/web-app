@@ -84,6 +84,11 @@ section {
     margin: auto 10px;
 }
 
+button.b-e.close {
+    margin: 0 0 0 auto;
+    background-color: transparent;
+}
+
 button {
     display: flex;
     border: 0;
@@ -98,7 +103,7 @@ button:hover {
     transition: .3s;
 }
 
-.submit-i {
+.b-i {
     margin: auto;
     width: 40px;
     height: 40px;
@@ -116,12 +121,6 @@ button:hover {
     cursor: pointer;
     background-color: #95E1D3;
     transition: .3s;
-}
-
-.reload-i {
-    margin: auto;
-    width: 40px;
-    height: 40px;
 }
 
 .input-text-class {
@@ -160,6 +159,32 @@ button:hover {
     font-size: 30px;
 }
 
+#galleryWindow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+
+    display: flex;
+    flex-flow: column;
+    width: 600px;
+    height: 600px;
+    background-color: #FDEFF4;
+}
+
+#gw-img {
+    width: 400px;
+    height: 400px;
+    margin: 0 auto 30px auto;
+}
+
+.gw-b {
+    width: 400px;
+    height: 50px;
+    margin:  0 auto;
+}
+
 @media only screen and (max-width: 1000px) {
     .block {
         width: 700px;
@@ -173,12 +198,7 @@ button:hover {
         margin: 10px;
     }
 
-    .submit-i {
-        width: 50px;
-        height: 50px;
-    }
-
-    .reload-i {
+    .b-i {
         width: 50px;
         height: 50px;
     }

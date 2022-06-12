@@ -6,6 +6,18 @@
 </head>
 <body>
 
+<div id="galleryWindow">
+    <button id="galleryWindowClose" class="b-e close" onclick="closeWindow()">
+        <img class="b-i" src="icons/crossDark.png" alt="">
+    </button>
+    <img id="gw-img" src="" alt="">
+    <button class="gw-b" onclick="">
+        <div class="text text-type-2">
+             Add to public gallery
+        </div>
+    </button>
+</div>
+
 <section>
     <div class="block">
         <div class="block-i">
@@ -17,14 +29,14 @@
         </div>
     </div>
     <div id="buttons">
-        <button id="submit" class="b-e" onclick="download()">
-            <img class="submit-i" src="icons/tick.png" alt="">
+        <button id="submit" class="b-e" onclick="onSubmitClick()">
+            <img class="b-i" src="icons/tick.png" alt="">
         </button>
         <label class="b-e">
             <input id="input-color" type="color" title="Change background color">
         </label>
         <button id="reload" class="b-e" onclick="document.location.reload();" title="Reload">
-            <img class="reload-i" src="icons/reload.png" alt="">
+            <img class="b-i" src="icons/reload.png" alt="">
         </button>
         <label class="input-text-class b-e">
             <input id="input-text" type="text" placeholder="Enter text" maxlength="12">

@@ -5,6 +5,7 @@ const inputLabel = document.getElementById('input-label');
 const inputColor = document.getElementById('input-color');
 const inputText = document.getElementById('input-text');
 const buttons = document.getElementById('buttons');
+const galleryWindow = document.getElementById('galleryWindow');
 const image = new Image();
 
 requestAnimationFrame(drawCanvas);
@@ -24,9 +25,48 @@ canvas.addEventListener('mouseout', mouseEvent, {passive: true});
 
 canvas.addEventListener('wheel', mouseWheelEvent, {passive: false});
 
-canvas.addEventListener('touchstart', mouseEvent);
-canvas.addEventListener('touchmove', mouseEvent);
-canvas.addEventListener('touchend', mouseEvent);
+// canvas.addEventListener('touchstart', mouseEvent);
+// canvas.addEventListener('touchmove', mouseEvent);
+// canvas.addEventListener('touchend', mouseEvent);
+
+inputImage.onchange = function() {
+    hideInputLabel(this.files[0]);
+};
+
+inputColor.onchange = function(e) {
+    bgColor = e.target.value;
+    if (dirty)
+        update();
+    dirty = true;
+};
+
+inputText.oninput = function(e) {
+    text = e.target.value;
+    if (dirty)
+        update();
+    dirty = true;
+};
+
+inputLabel.ondrop = function(e) {
+    e.preventDefault();
+    inputImage.files = e.dataTransfer.files;
+    hideInputLabel(inputImage.files[0]);
+};
+
+inputLabel.ondragover = function(e) {
+    e.preventDefault();
+    this.classList.add('dragover');
+};
+
+inputLabel.ondragleave = function(e) {
+    e.preventDefault();
+    this.classList.remove('dragover');
+};
+
+document.onpaste = function(e){
+    const file = e.clipboardData.items[0].getAsFile();
+    hideInputLabel(file);
+};
 
 function update() {
     dirty = false;
@@ -97,50 +137,27 @@ function mouseWheelEvent(e) {
     e.preventDefault();
 }
 
-inputImage.onchange = function() {
-    hideInputLabel(this.files[0]);
-};
-
-inputColor.onchange = function(e) {
-    bgColor = e.target.value;
-    if (dirty)
-        update();
-    dirty = true;
-};
-
-inputText.oninput = function(e) {
-    text = e.target.value;
-    if (dirty)
-        update();
-    dirty = true;
-};
-
-inputLabel.ondrop = function(e) {
-    e.preventDefault();
-    inputImage.files = e.dataTransfer.files;
-    hideInputLabel(inputImage.files[0]);
-};
-
-inputLabel.ondragover = function(e) {
-    e.preventDefault();
-    this.classList.add('dragover');
-};
-
-inputLabel.ondragleave = function(e) {
-    e.preventDefault();
-    this.classList.remove('dragover');
-};
-
-document.onpaste = function(e){
-    const file = e.clipboardData.items[0].getAsFile();
-    hideInputLabel(file);
-};
-
-function download() {
+function download(imageData) {
     const link = document.createElement('a');
     link.download = 'image512x512.png';
-    link.href = canvas.toDataURL();
+    link.href = imageData;
     link.click();
+}
+
+function closeWindow() {
+    galleryWindow.style.display = 'none';
+}
+
+function showGalleryWindow(imageData) {
+    const gwImage = document.getElementById('gw-img');
+    gwImage.src = imageData;
+    galleryWindow.style.display = 'flex';
+}
+
+function onSubmitClick() {
+    const imageData = canvas.toDataURL();
+    download(imageData);
+    showGalleryWindow(imageData);
 }
 
 function hideInputLabel(imageFile) {
