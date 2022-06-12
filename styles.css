@@ -7,15 +7,34 @@ body {
     background-color: #f8adc3;
 }
 
-header {
+h1 {
     display: flex;
-    margin: auto;
-    font-size: 50px;
+    margin: 30px auto;
+    user-select: none;
+
+    font-size: 70px;
+    font-family: "Montserrat ExtraBold", sans-serif;
+    color: #524A4E;
+}
+
+h3 {
+    user-select: none;
+    position: absolute;
+    top: 0;
+    right: 50px;
+
+    font-size: 35px;
+    font-family: "Montserrat Medium", sans-serif;
+    color: #524A4E;
+}
+
+h1, h3:hover {
+    cursor: pointer;
 }
 
 section {
     display: block;
-    margin: auto;
+    margin: 0 auto;
 }
 
 .block {
