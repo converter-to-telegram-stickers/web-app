@@ -2,11 +2,11 @@
   "name": "converter-to-telegram-stickers.github.io",
   "version": "1.0.0",
   "description": "Проект по курсу «Основы веб-разработки», ФИИТ-203. Команда: Михаил Ланец, Диляра Фатыхова, Алексей Соколков, Мария Драпкина",
-  "main": "main.js",
+  "main": "express.js",
   "type": "module",
   "scripts": {
-    "serve": "nodemon index.js",
-    "start": "node index.js"
+    "serve": "nodemon express.js",
+    "start": "node express.js"
   },
   "repository": {
     "type": "git",
