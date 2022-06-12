@@ -166,7 +166,7 @@ button:hover {
     transform: translate(-50%, -50%);
     z-index: 1000;
 
-    display: flex;
+    display: none;
     flex-flow: column;
     width: 600px;
     height: 600px;

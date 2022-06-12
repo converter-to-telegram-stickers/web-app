@@ -35,15 +35,13 @@ inputImage.onchange = function() {
 
 inputColor.onchange = function(e) {
     bgColor = e.target.value;
-    if (dirty)
-        update();
+    if (dirty) update();
     dirty = true;
 };
 
 inputText.oninput = function(e) {
     text = e.target.value;
-    if (dirty)
-        update();
+    if (dirty) update();
     dirty = true;
 };
 
@@ -81,8 +79,7 @@ function update() {
 }
 
 function scaleAt(at, amount) {
-    if (dirty)
-        update();
+    if (dirty) update();
     scale *= amount;
     pos.x = at.x - (at.x - pos.x) * amount;
     pos.y = at.y - (at.y - pos.y) * amount;
@@ -93,8 +90,7 @@ function drawCanvas() {
     if (dirty) {
         ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        if (dirty)
-            update();
+        if (dirty) update();
         ctx.setTransform(matrix[0], matrix[1], matrix[2], matrix[3], matrix[4], matrix[5]);
         ctx.drawImage(image, 0, 0);
         ctx.resetTransform();
@@ -116,8 +112,7 @@ function mouseEvent(e) {
     mouse.x = e.offsetX;
     mouse.y = e.offsetY
     if (mouse.dragging) {
-        if (dirty)
-            update();
+        if (dirty) update();
         pos.x += mouse.x - mouse.oldX;
         pos.y += mouse.y - mouse.oldY;
         dirty = true;
@@ -127,11 +122,9 @@ function mouseEvent(e) {
 function mouseWheelEvent(e) {
     const x = e.offsetX;
     const y = e.offsetY;
-    if (e.deltaY < 0)
-        scaleAt({x, y}, 1.1);
+    if (e.deltaY < 0) scaleAt({x, y}, 1.1);
     else {
-        if (scale < 0.04)
-            scale = 0.04;
+        if (scale < 0.04) scale = 0.04;
         scaleAt({x, y}, 1 / 1.1);
     }
     e.preventDefault();
@@ -161,18 +154,21 @@ function onSubmitClick() {
 }
 
 function hideInputLabel(imageFile) {
-    if (imageFile.name.includes('png') ||
-        imageFile.name.includes('jpg') ||
-        imageFile.name.includes('jpeg')) {
-        inputLabel.style.display = 'none';
-        canvas.style.display = 'flex';
-        buttons.style.display = 'flex';
-        image.onload = function() {
-            ctx.drawImage(image, 0, 0);
-            canvas.elementFromPoint(0, 0).click();
-        };
-        image.src = URL.createObjectURL(imageFile);
-    }
-    else
+    const fileFormat = imageFile.name.split('.').pop();
+    const correctImageFormat = fileFormat === 'png' ||
+        fileFormat === 'jpg' || fileFormat === 'jpeg';
+
+    if (!correctImageFormat) {
         alert('Wrong file type. Try again.');
+        return;
+    }
+
+    inputLabel.style.display = 'none';
+    canvas.style.display = 'flex';
+    buttons.style.display = 'flex';
+    image.onload = () => {
+        ctx.drawImage(image, 0, 0);
+        canvas.elementFromPoint(0, 0).click();
+    };
+    image.src = URL.createObjectURL(imageFile);
 }
