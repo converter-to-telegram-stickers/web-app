@@ -3,20 +3,9 @@
 <head>
     <title>TSFL</title>
     <link rel="stylesheet" href="../css/styles.css">
+    <script src="../main.js"></script>
 </head>
 <body>
-
-<div id="galleryWindow">
-    <button id="galleryWindowClose" class="b-e close" onclick="closeWindow()">
-        <img class="b-i" src="icons/crossDark.png" alt="" draggable="false">
-    </button>
-    <img id="gw-img" src="" alt="">
-    <button class="gw-b" onclick="">
-        <div class="text text-type-2">
-            Add to public gallery
-        </div>
-    </button>
-</div>
 
 <h1>
     <a href="">TSFL</a>
@@ -25,6 +14,18 @@
 <h3>
     <a href="/gallery">Gallery</a>
 </h3>
+
+<div id="galleryWindow">
+    <button id="galleryWindowClose" class="b-e close" onclick="closeWindow()">
+        <img class="b-i" src="icons/crossDark.png" alt="" draggable="false">
+    </button>
+    <img id="gw-img" src="" alt="">
+    <button class="gw-b" onclick="addToGallery()">
+        <div class="text text-type-2">
+            Add to public gallery
+        </div>
+    </button>
+</div>
 
 <section>
     <div class="block">
@@ -51,8 +52,6 @@
         </label>
     </div>
 </section>
-
-<script src="main.js"></script>
 
 </body>
 </html>

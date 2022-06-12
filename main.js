@@ -1,3 +1,5 @@
+import * as fs from 'fs';
+
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const inputImage = document.getElementById('input');
@@ -151,6 +153,11 @@ function onSubmitClick() {
     const imageData = canvas.toDataURL();
     download(imageData);
     showGalleryWindow(imageData);
+}
+
+function addToGallery() {
+    const stickersJSON = fs.readFileSync('./stickers.json', 'utf-8');
+    const stickers = JSON.parse(stickersJSON);
 }
 
 function hideInputLabel(imageFile) {
