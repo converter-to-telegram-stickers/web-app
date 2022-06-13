@@ -5,6 +5,6 @@ const router = Router();
 
 router.get('/api/stickers', getAll);
 
-router.post('/api/stickers', create)
+router.post('/api/stickers', create);
 
 export default router;
