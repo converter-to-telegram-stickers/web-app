@@ -11,3 +11,10 @@ const App = {
 };
 
 Vue.createApp(App).mount('#container');
+
+function download(sticker) {
+    const link = document.createElement('a');
+    link.download = 'image512x512.png';
+    link.href = sticker.src;
+    link.click();
+}

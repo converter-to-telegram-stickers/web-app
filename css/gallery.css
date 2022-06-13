@@ -55,6 +55,11 @@ section {
 img {
     width: 80%;
     height: 80%;
-    border: #95E1D3 solid;
+    border: #524A4E solid;
     margin: auto;
+}
+
+img:hover {
+    border: #95E1D3 solid;
+    cursor: pointer;
 }

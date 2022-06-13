@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>TSFM Gallery</title>
-    <link rel="stylesheet" href="../css/galleryStyles.css">
+    <link rel="stylesheet" href="../css/gallery.css">
 </head>
 <body>
     <div class="header">
@@ -19,12 +19,12 @@
         <h2 v-if="stickers.length === 0">Loading stickers ...</h2>
         <div class="c-i" v-else>
             <section v-for="sticker in stickers">
-                <img src="{{ sticker.data }}" alt="">
+                <img :src="sticker.data" alt="" onclick="download(this)">
             </section>
         </div>
     </div>
 
     <script src="https://unpkg.com/vue@next"></script>
-    <script src="../galleryVue.js"></script>
+    <script src="../controllers/gallery.js"></script>
 </body>
 </html>

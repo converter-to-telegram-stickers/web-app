@@ -185,5 +185,4 @@ async function addToGallery() {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(sticker)
     });
-    console.log(sticker);
 }
