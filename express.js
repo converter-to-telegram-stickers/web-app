@@ -1,6 +1,7 @@
 import express, {urlencoded} from 'express';
 import path from 'path';
 import stickersRoutes from './routes/stickers.js';
+import bodyParser from 'body-parser';
 
 const DIRNAME = path.resolve();
 const PORT = process.env.PORT ?? 3000;
@@ -10,6 +11,7 @@ app.set('view engine', 'ejs');
 
 app.use(express.static(DIRNAME));
 app.use(express.json());
+app.use(bodyParser.json({limit: '1mb'}));
 app.use(urlencoded({extended: false}));
 app.use(stickersRoutes);
 
