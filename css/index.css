@@ -439,8 +439,8 @@ a:hover {
     display: grid;
     margin: auto auto 50px auto;
     grid-gap: 20px;
-    grid-template-columns: repeat(auto-fill, 300px);
-    width: 90%;
+    grid-template-columns: repeat(auto-fill, 256px);
+    width: 100%;
     justify-content: center;
 }
 
@@ -457,7 +457,6 @@ a:hover {
 .img_gallery_sticker {
     width: 80%;
     border: #524A4E solid;
-    margin: auto;
 }
 
 .img_gallery_sticker:hover {
