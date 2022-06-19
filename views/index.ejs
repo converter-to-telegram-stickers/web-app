@@ -118,23 +118,12 @@
 
     <div id="lightbox_guide2" class="lightbox">
         <div class="lightbox_window">
+            <p class="lightbox_text">Лайтбокс со вторым гайдом!!!!</p>
             <div class="lightbox_close_button clickable" onclick="changeVisibilityById('lightbox_guide2', false)"><p class="bold_text" style="padding: 10px; color: #2B4F7E">Закрыть</p></div>
-            <div id="container">
-                <h2 class="bold_text" v-if="stickers.length === 0">Loading stickers ...</h2>
-                <div class="c-i" v-else>
-                    <section v-for="sticker in stickers">
-                        <img :src="sticker.data" alt="" onclick="download(this)">
-                    </section>
-                </div>
-            </div>
-
-
         </div>
     </div>
 
     <script src="../controllers/index.js"></script>
-    <script src="https://unpkg.com/vue@next"></script>
-    <script src="../controllers/gallery.js"></script>
 
 </body>
 </html>
