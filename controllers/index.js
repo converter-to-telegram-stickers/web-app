@@ -2,7 +2,7 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const inputImage = document.getElementById('input');
 const inputLabel = document.getElementById('input-label');
-const imageText = document.getElementById('input-text');
+let imageText = document.getElementById('input-text');
 const image = new Image();
 let imageData = '';
 
@@ -26,6 +26,10 @@ canvas.addEventListener('wheel', mouseWheelEvent, {passive: false});
 // canvas.addEventListener('touchstart', mouseEvent);
 // canvas.addEventListener('touchmove', mouseEvent);
 // canvas.addEventListener('touchend', mouseEvent);
+
+function generateImageText(){
+    imageText = "Hello world!";
+}
 
 inputImage.onchange = function() {
     loadImage(this.files[0]);
@@ -134,7 +138,7 @@ function loadImage(imageFile) {
         fileFormat === 'jpg' || fileFormat === 'jpeg';
 
     if (!correctImageFormat) {
-        alert('Wrong file type. Try again.');
+        alert('Загружен файл неподдерживаемого формата. Убедитесь, что загруженный файл имеет расширение .jpg, .jpeg или .png');
         return;
     }
 

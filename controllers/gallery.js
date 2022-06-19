@@ -18,9 +18,3 @@ function download(sticker) {
     link.href = sticker.src;
     link.click();
 }
-
-function updateGallery() {
-    const res = fetch('/api/stickers');
-    this.stickers = res.json();
-    Vue.createApp(App).mount('#container');
-}
