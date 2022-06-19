@@ -352,6 +352,10 @@ a:hover {
 }
 
 .gallery_button {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
     font-size: 35px;
     margin: 10px;
     flex: 3.5;

@@ -93,7 +93,7 @@ function drawCanvas() {
         ctx.font = 'bold 38px sans-serif';
         ctx.fillStyle = '#ffffff';
         ctx.textAlign = 'center';
-        ctx.strokeStyle = '#000000';
+        ctx.strokeText = '#000000';
         ctx.fillText(text, canvas.width / 2, canvas.height - 30);
     }
     requestAnimationFrame(drawCanvas);
