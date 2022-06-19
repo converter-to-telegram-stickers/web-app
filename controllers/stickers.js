@@ -13,7 +13,7 @@ export const create = (req, res) => {
     stickers.push(newSticker);
     fs.readFile('./stickers.json', function (err, data) {
         const json = JSON.parse(data.toString());
-        json.push(newSticker);
+        json.unshift(newSticker);
         fs.writeFile('./stickers.json', JSON.stringify(json), err => {
             if (err) throw err;
         });
