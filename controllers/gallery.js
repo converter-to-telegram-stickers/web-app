@@ -22,4 +22,5 @@ function download(sticker) {
 function updateGallery() {
     const res = fetch('/api/stickers');
     this.stickers = res.json();
+    Vue.createApp(App).mount('#container');
 }
