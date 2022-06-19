@@ -6,6 +6,8 @@ let imageText = document.getElementById('input-text');
 const image = new Image();
 let imageData = '';
 
+const funnyLables = ["аниме", "добрый чел.", "ломай ломай", "всем интересно!", "смирись", "в нем заключено 6"];
+
 requestAnimationFrame(drawCanvas);
 
 let matrix = [1, 0, 0, 1, 0, 0];
@@ -28,9 +30,10 @@ canvas.addEventListener('wheel', mouseWheelEvent, {passive: false});
 // canvas.addEventListener('touchend', mouseEvent);
 
 function generateImageText(){
-    imageText = "Hello world!";
-    inputLabel = "Hello world!";
-    text = "Hello world!";
+    let randomLabel = funnyLables[Math.floor(Math.random()*funnyLables.length)]
+    imageText = randomLabel;
+    inputLabel = randomLabel;
+    text = randomLabel;
     if (dirty) update();
     dirty = true;
 }
