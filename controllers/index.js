@@ -94,6 +94,7 @@ function drawCanvas() {
         ctx.textAlign = 'center';
         ctx.strokeStyle = 'black';
         ctx.lineWidth = 6;
+        ctx.strokeText(text, canvas.width / 2, canvas.height - 30);
         ctx.fillStyle = 'white';
         ctx.fillText(text, canvas.width / 2, canvas.height - 30);
     }
