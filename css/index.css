@@ -455,7 +455,8 @@ a:hover {
 }
 
 .img_gallery_sticker {
-    width: 80%;
+    width: 100%;
+    height: auto;
     border: #524A4E solid;
 }
 
