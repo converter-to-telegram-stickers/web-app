@@ -93,8 +93,7 @@ function drawCanvas() {
         ctx.font = 'bold 38px Times New Roman';
         ctx.textAlign = 'center';
         ctx.strokeStyle = 'black';
-        ctx.lineWidth = 3;
-        ctx.strokeText(text, canvas.width / 2, canvas.height - 30);
+        ctx.lineWidth = 6;
         ctx.fillStyle = 'white';
         ctx.fillText(text, canvas.width / 2, canvas.height - 30);
     }
