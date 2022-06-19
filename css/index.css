@@ -423,6 +423,7 @@ a:hover {
     margin: 10px;
     line-height: 95%;
     color: #A9C1C7;
+    text-align: center;
 }
 
 .lightbox_close_button {
