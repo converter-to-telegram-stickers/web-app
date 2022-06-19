@@ -1,58 +1,129 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>TSFM</title>
-    <link rel="stylesheet" href="../css/index.css">
+    <meta charset="UTF-8">
+    <title>Image → TG Sticker</title>
+    <link rel="icon" href="assets/favicon.png">
+    <link rel="stylesheet" href="../css/index.css"/>
 </head>
 <body>
 
-<h1>
-    <a href="">TSFM</a>
-</h1>
+    <div class="frame">
 
-<h3>
-    <a href="/gallery">Gallery</a>
-</h3>
-
-<div id="galleryWindow">
-    <button id="galleryWindowClose" class="b-e close" onclick="closeWindow()">
-        <img class="b-i" src="../images/crossDark.png" alt="" draggable="false">
-    </button>
-    <img id="gw-img" src="" alt="">
-    <button class="gw-b" onclick="addToGallery()">
-        <div class="text text-type-2">
-            Add to public gallery
+        <div class="row">
+            <div class="logo_block">
+                <img src="assets/logo1.png" alt="logo">
+                <img src="assets/logo2.png" alt="logo">
+                <img src="assets/logo3.png" alt="logo">
+            </div>
         </div>
-    </button>
-</div>
 
-<section>
-    <div class="block">
-        <div class="block-i">
-            <label id="input-label">
-                <input id="input" type="file">
-                <span class="text text-type-1">Choose image<br>or drag it here</span>
-            </label>
-            <canvas id="canvas" width="512px" height="512px"></canvas>
+        <div class="row">
+            <div class = "block_left">
+                <p class="header bold_text" style="font-size: 32px; text-align: center; padding-top: 10px; padding-bottom: 8px">
+                    <img src="assets/arrow_up.png" style="width: 30px; height: 30px; padding-right: 5px" alt="">Загрузите изображение
+                </p>
+                <label id="input-label" class="upload_block clickable">
+                    <input id="input" type="file">
+                    <span class="bold_text" style="font-size: 32px; position:absolute; text-align:center;">Перетащите файл в эту область<br><mark style="color: #DDF7FE; background-color: #5D8D76">или <u>нажмите сюда</u></mark></span>
+                </label>
+            </div>
+            <div class = "block_right">
+                <p class="header bold_text" style="font-size: 32px; text-align: center; padding-top: 10px; padding-bottom: 8px">
+                    <img src="assets/pen.png" style="width: 30px; height: 30px; padding-right: 5px" alt="">Отредактируйте результат
+                </p>
+                <div class="edit_block">
+                    <canvas id="canvas" width="512px" height="512px"></canvas>
+
+                    <div class="block_with_edit_buttons">
+                        <div class="help_button clickable" onclick="changeVisibilityById('lightbox_info', true)">
+                            <img src="assets/question.png" style="width: 40px; height: 40px; padding-right: 10px" alt="">
+                            <p class="bold_text" style="font-size: 25px; color: #133765"><u>Как редактировать?</u></p>
+                        </div>
+                        <div class="sticker_text_block">
+                            <div class="sticker_text_header">
+                                <img src="assets/Aa.png" style="width: 40px; height: 40px; padding-right: 10px" alt="">
+                                <p class="bold_text" style="font-size: 25px; margin-top: 10px; margin-bottom: 5px">Подписать стикер</p>
+                            </div>
+                            <div class="sticker_text_block_with_input">
+                                <input id="input-text" type="text" class="input_field bold_text" placeholder="Введите текст" style="">
+                                <div class="magic_button clickable"><img src="assets/magic_wand.png" alt="Генерация"></div>
+                            </div>
+                        </div>
+                        <div class="to_gallery_button">
+                            <p class="bold_text" style="font-size: 25px; padding-left: 10px; padding-right: 10px">Оставить в галерее</p>
+                            <input id="gallery-checkbox" type="checkbox" style="width: 30px; height: 30px">
+                        </div>
+
+                        <!--                    <div class="delete_button clickable">-->
+                        <!--                        <img src="assets/trash.png" style="width: 40px; height: 40px; padding-right: 10px">-->
+                        <!--                        <p class="bold_text" style="font-size: 25px; color: #DDF7FE"><u>Начать заново</u></p>-->
+                        <!--                    </div>-->
+
+                    </div>
+
+                </div>
+
+                <div class = "block_download">
+                    <button class="download_button clickable" onclick="onSubmitClick()"><img src="assets/arrow_down.png" style="width: 30px; height: 30px; padding-right: 5px" alt="">
+                        <p class="bold_text" style="color: #DDF7FE"><u>Скачать</u></p></button>
+                    <button class="gallery_button clickable" onclick="location.href='/gallery'" type="button">
+                        <p class="bold_text" style="color: #DDF7FE"><u>Галерея</u></p>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="placeholder"></div>
+        </div>
+
+        <div class="row">
+            <div class = "block_left">
+                <div class="guides_button">
+                    <p class="bold_text" style="font-size: 32px; text-align: center; text-align: justify">Гайды</p>
+                </div>
+                <div class="guide_list">
+                    <div class = "list_item clickable" onclick="changeVisibilityById('lightbox_guide1', true)">
+                        <img src="assets/number1.png" style=" width: 50px; height: 55px">
+                        <p class="medium_text" style="font-size: 32px; text-align: left; color: #A9C1C7; margin: 10px">
+                            <u>Как создать стикерпак в Телеграме?</u></p>
+                    </div>
+                    <div class = "list_item clickable" onclick="changeVisibilityById('lightbox_guide2', true)">
+                        <img src="assets/number2.png" style="width: 50px; height: 55px">
+                        <p class="medium_text" style="font-size: 32px; text-align: left; color: #A9C1C7; margin: 10px">
+                            <u>Как пополнять свои стикерпаки?</u></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div id="buttons">
-        <button id="submit" class="b-e" onclick="onSubmitClick()">
-            <img class="b-i" src="../images/tick.png" alt="" draggable="false">
-        </button>
-        <label class="b-e">
-            <input id="input-color" type="color" title="Change background color">
-        </label>
-        <button id="reload" class="b-e" onclick="document.location.reload();" title="Reload">
-            <img class="b-i" src="../images/reload.png" alt="" draggable="false">
-        </button>
-        <label class="input-text-class b-e">
-            <input id="input-text" type="text" placeholder="Enter text" maxlength="12">
-        </label>
-    </div>
-</section>
 
-<script src="../controllers/index.js"></script>
+    <p class="medium_text" style="font-size: 18px; text-align: center; color: #2B4F7E; margin: 30px;"><a href="https://github.com/converter-to-telegram-stickers"> Командный проект «Веб-разработки», ФТ-203</a><br>
+        Алексей Соколков, Диляра Фатыхова, Михаил Ланец, Мария Драпкина (c) 2022</p>
+
+    <div id="lightbox_info" class="lightbox">
+        <div class="lightbox_window">
+            <p class="lightbox_text">Лайтбокс c информацией о редактировании!</p>
+            <div class="lightbox_close_button clickable" onclick="changeVisibilityById('lightbox_info', false)"><p class="bold_text" style="padding: 10px; color: #2B4F7E">Закрыть</p></div>
+        </div>
+    </div>
+
+    <div id="lightbox_guide1" class="lightbox">
+        <div class="lightbox_window">
+            <p class="lightbox_text">Лайтбокс с первым гайдом!!</p>
+            <div class="lightbox_close_button clickable" onclick="changeVisibilityById('lightbox_guide1', false)"><p class="bold_text" style="padding: 10px; color: #2B4F7E">Закрыть</p></div>
+        </div>
+    </div>
+
+    <div id="lightbox_guide2" class="lightbox">
+        <div class="lightbox_window">
+            <p class="lightbox_text">Лайтбокс со вторым гайдом!!!!</p>
+            <div class="lightbox_close_button clickable" onclick="changeVisibilityById('lightbox_guide2', false)"><p class="bold_text" style="padding: 10px; color: #2B4F7E">Закрыть</p></div>
+        </div>
+    </div>
+
+    <script src="../controllers/index.js"></script>
 
 </body>
 </html>

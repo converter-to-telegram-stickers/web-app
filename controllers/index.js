@@ -2,10 +2,7 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const inputImage = document.getElementById('input');
 const inputLabel = document.getElementById('input-label');
-const inputColor = document.getElementById('input-color');
-const inputText = document.getElementById('input-text');
-const buttons = document.getElementById('buttons');
-const galleryWindow = document.getElementById('galleryWindow');
+const imageText = document.getElementById('input-text');
 const image = new Image();
 let imageData = '';
 
@@ -31,41 +28,28 @@ canvas.addEventListener('wheel', mouseWheelEvent, {passive: false});
 // canvas.addEventListener('touchend', mouseEvent);
 
 inputImage.onchange = function() {
-    hideInputLabel(this.files[0]);
-};
-
-inputColor.onchange = function(e) {
-    bgColor = e.target.value;
-    if (dirty) update();
-    dirty = true;
-};
-
-inputText.oninput = function(e) {
-    text = e.target.value;
-    if (dirty) update();
-    dirty = true;
+    loadImage(this.files[0]);
 };
 
 inputLabel.ondrop = function(e) {
     e.preventDefault();
     inputImage.files = e.dataTransfer.files;
-    hideInputLabel(inputImage.files[0]);
+    loadImage(inputImage.files[0]);
 };
 
-inputLabel.ondragover = function(e) {
-    e.preventDefault();
-    this.classList.add('dragover');
+document.onpaste = function(e) {
+    loadImage(e.clipboardData.items[0].getAsFile());
 };
 
-inputLabel.ondragleave = function(e) {
-    e.preventDefault();
-    this.classList.remove('dragover');
+imageText.oninput = function(e) {
+    text = e.target.value;
+    if (dirty) update();
+    dirty = true;
 };
 
-document.onpaste = function(e){
-    const file = e.clipboardData.items[0].getAsFile();
-    hideInputLabel(file);
-};
+function changeVisibilityById(id, show) {
+    document.getElementById(id).style.display = show ? 'flex' : 'none';
+}
 
 function update() {
     dirty = false;
@@ -131,30 +115,20 @@ function mouseWheelEvent(e) {
     e.preventDefault();
 }
 
-function download(imageData) {
+function download() {
     const link = document.createElement('a');
     link.download = 'image512x512.png';
     link.href = imageData;
     link.click();
 }
 
-function closeWindow() {
-    galleryWindow.style.display = 'none';
-}
-
-function showGalleryWindow(imageData) {
-    const gwImage = document.getElementById('gw-img');
-    gwImage.src = imageData;
-    galleryWindow.style.display = 'flex';
-}
-
 function onSubmitClick() {
     imageData = canvas.toDataURL();
-    download(imageData);
-    showGalleryWindow(imageData);
+    download();
+    tryToAddToGallery();
 }
 
-function hideInputLabel(imageFile) {
+function loadImage(imageFile) {
     const fileFormat = imageFile.name.split('.').pop();
     const correctImageFormat = fileFormat === 'png' ||
         fileFormat === 'jpg' || fileFormat === 'jpeg';
@@ -164,9 +138,6 @@ function hideInputLabel(imageFile) {
         return;
     }
 
-    inputLabel.style.display = 'none';
-    canvas.style.display = 'flex';
-    buttons.style.display = 'flex';
     image.onload = () => {
         ctx.drawImage(image, 0, 0);
         canvas.elementFromPoint(0, 0).click();
@@ -174,8 +145,8 @@ function hideInputLabel(imageFile) {
     image.src = URL.createObjectURL(imageFile);
 }
 
-async function addToGallery() {
-    closeWindow();
+async function tryToAddToGallery() {
+    if (!document.getElementById('gallery-checkbox').checked) return;
     const sticker = {
         id: Date.now(),
         data: imageData

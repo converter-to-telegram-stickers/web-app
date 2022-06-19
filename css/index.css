@@ -1,89 +1,108 @@
+/* Переменные для css-файла.
+--border_width — толщина границ у всех блоков */
+:root {
+    --border_width: 6px;
+    --border_color: #5E7C96;
+}
+
+/* Раздел с загрузкой нужных шрифтов */
+@font-face {
+    font-family: 'Onest';
+    src: url('fonts/Onest-Light.eot');
+    src: url('fonts/Onest-Light.eot?#iefix') format('embedded-opentype'),
+    url('fonts/Onest-Light.woff2') format('woff2'),
+    url('fonts/Onest-Light.woff') format('woff'),
+    url('fonts/Onest-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Onest';
+    src: url('fonts/Onest-Bold.eot');
+    src: url('fonts/Onest-Bold.eot?#iefix') format('embedded-opentype'),
+    url('fonts/Onest-Bold.woff2') format('woff2'),
+    url('fonts/Onest-Bold.woff') format('woff'),
+    url('fonts/Onest-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Onest';
+    src: url('fonts/Onest-ExtraBold.eot');
+    src: url('fonts/Onest-ExtraBold.eot?#iefix') format('embedded-opentype'),
+    url('fonts/Onest-ExtraBold.woff2') format('woff2'),
+    url('fonts/Onest-ExtraBold.woff') format('woff'),
+    url('fonts/Onest-ExtraBold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Onest';
+    src: url('fonts/Onest-Thin.eot');
+    src: url('fonts/Onest-Thin.eot?#iefix') format('embedded-opentype'),
+    url('fonts/Onest-Thin.woff2') format('woff2'),
+    url('fonts/Onest-Thin.woff') format('woff'),
+    url('fonts/Onest-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Onest';
+    src: url('fonts/Onest-Regular.eot');
+    src: url('fonts/Onest-Regular.eot?#iefix') format('embedded-opentype'),
+    url('fonts/Onest-Regular.woff2') format('woff2'),
+    url('fonts/Onest-Regular.woff') format('woff'),
+    url('fonts/Onest-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Onest';
+    src: url('fonts/Onest-Medium.eot');
+    src: url('fonts/Onest-Medium.eot?#iefix') format('embedded-opentype'),
+    url('fonts/Onest-Medium.woff2') format('woff2'),
+    url('fonts/Onest-Medium.woff') format('woff'),
+    url('fonts/Onest-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Onest';
+    src: url('fonts/Onest-Black.eot');
+    src: url('fonts/Onest-Black.eot?#iefix') format('embedded-opentype'),
+    url('fonts/Onest-Black.woff2') format('woff2'),
+    url('fonts/Onest-Black.woff') format('woff'),
+    url('fonts/Onest-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
 body {
-    display: flex;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    flex-flow: column;
-    background-color: #f8adc3;
-}
-
-h1 {
-    display: flex;
-    margin: 30px auto;
-
-    font-size: 70px;
-    font-family: "Montserrat ExtraBold", sans-serif;
-    color: #524A4E;
-}
-
-h3 {
-    position: absolute;
-    top: 0;
-    right: 50px;
-
-    font-size: 35px;
-    font-family: "Montserrat Medium", sans-serif;
-    color: #524A4E;
-}
-
-h1, h3:hover {
-    cursor: pointer;
+    background-color: #133765;
 }
 
 a {
-    transition: .3s;
-    color: inherit;
+    text-indent: 500px;
+    line-height: 80%;
+}
+
+a:link, a:visited {
+    color: #2B4F7E;
+    background-color: transparent;
     text-decoration: none;
 }
 
 a:hover {
-    transition: .3s;
-    color: #95E1D3;
-}
-
-section {
-    display: block;
-    margin: 0 auto;
-}
-
-.block {
-    z-index: 500;
-    display: flex;
-    width: 400px;
-    height: 400px;
-    margin-bottom: 20px;
-    background-color: #524A4E;
-}
-
-.block:active {
-    cursor: all-scroll;
-}
-
-.block-i {
-    display: flex;
-    margin: auto;
-    width: 80%;
-    height: 80%;
-    background-color: #f8adc3;
-}
-
-#input-label {
-    z-index: 499;
-    display: flex;
-    margin: auto;
-    width: 100%;
-    height: 100%;
-    transition: .3s;
-}
-
-#input-label.dragover {
-    background-color: #95E1D3;
-}
-
-#input-label:hover {
-    cursor: pointer;
-    background-color: #95E1D3;
-    transition: .3s;
+    color: #41699c;
+    background-color: transparent;
+    text-decoration: underline;
 }
 
 #input-label > #input {
@@ -91,158 +110,321 @@ section {
 }
 
 #canvas {
-    display: none;
-    margin: auto;
-    width: 100%;
-    height: 100%;
+    width: 45%;
+    border: var(--border_width) solid #A9C1C7;
 }
 
-#buttons {
-    display: none;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0);
+/* Стиль почти всего текста.
+Размеры лучше указывать напрямую в html через style */
+.bold_text {
+    font-family: 'Onest', sans-serif;
+    font-weight: bold;
+    font-style: normal;
+    color: #A9C1C7;
+    margin: 0;
+}
+
+/* Стиль маленького и неважного текста.
+Размеры лучше указывать напрямую в html через style */
+.medium_text {
+    font-family: 'Onest', sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    margin: 0;
+    line-height: 95%;
+}
+
+/* Внешняя рамка, самая база */
+.frame {
+    display: flex;
+    flex-wrap: wrap;
+    width: 92%;
+    height: 100%;
+    margin: 2% 4% 0;
+    border: var(--border_width) solid var(--border_color);
+    border-bottom-style: none;
+    padding: 0;
+    float: top;
+}
+
+/* Стиль шапки с логотипом */
+.logo_block {
+    zoom: 0.4;
+    margin: 20px auto;
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
 
-.b-e {
-    width: 55px;
-    height: 55px;
-    margin: auto 10px;
-}
-
-button.b-e.close {
-    margin: 0 0 0 auto;
-    background-color: transparent;
-}
-
-button {
+/* Строка, в которую встраиваются блоки. Сама по себе пустая */
+.row {
+    width: 100%;
     display: flex;
-    border: 0;
-    background-color: #524A4E;
-    transition: .3s;
-    user-select: none;
+    flex-wrap: nowrap;
+    border: none;
+    border-bottom: var(--border_width) solid var(--border_color);
 }
 
-button:hover {
-    cursor: pointer;
-    background-color: #95E1D3;
-    transition: .3s;
+/* Блок слева */
+.block_left {
+    display: flex;
+    flex: 3;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 50%;
+    outline: var(--border_width) solid var(--border_color);
+    padding: 0;
+    float: top;
 }
 
-.b-i {
-    margin: auto;
-    width: 40px;
+/* Блок справа */
+.block_right {
+    display: flex;
+    flex: 4;
+    width: 50%;
+    height: 100%;
+    flex-flow: column nowrap;
+    align-content: space-between;
+    padding: 0;
+    float: top;
+}
+
+/* Мини-блок с разделом загрузки */
+.block_download {
+    display: flex;
+    flex-wrap: nowrap;
+    align-self: flex-end;
+    width: 100%;
+    height: 80px;
+    border: none;
+    border-top: var(--border_width) solid var(--border_color);
+}
+
+/* Можно вставить в строку и получится строка-отступ */
+.placeholder {
+    width: 100%;
     height: 40px;
 }
 
-#input-color {
-    width: 100%;
-    height: 100%;
-    border: none;
-    background-color: #524A4E;
-    transition: .3s;
-}
-
-#input-color:hover {
-    cursor: pointer;
-    background-color: #95E1D3;
-    transition: .3s;
-}
-
-.input-text-class {
-    width: 175px;
-}
-
-#input-text {
-    width: 175px;
-    height: 100%;
-    border: none;
-    outline: 0;
-    padding: 15px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-
-    font-size: 24px;
-    font-family: "Montserrat Medium", sans-serif;
-    color: #524A4E;
-}
-
-.text {
+.header {
     display: flex;
-    margin: auto;
+    justify-content: center;
+    align-items: center;
 }
 
-.text-type-1 {
-    font-family: "Montserrat Medium", sans-serif;
-    color: #524A4E;
-    font-size: 30px;
+.upload_block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: calc(100% - 60px);
+    background-image: url(assets/stripped_background.png);
 }
 
-.text-type-2 {
-    font-family: "Montserrat Medium", sans-serif;
-    color: #FDEFF4;
-    font-size: 30px;
+.edit_block {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-left: var(--border_width);
+    padding: 0 10px 10px;
 }
 
-#galleryWindow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-
-    display: none;
-    flex-flow: column;
-    width: 600px;
-    height: 600px;
-    background-color: #FDEFF4;
+.big_sticker_placeholder {
+    width: 45%;
+    padding: 0 10px 10px;
+    border: var(--border_width) solid #A9C1C7;
 }
 
-#gw-img {
-    width: 400px;
-    height: 400px;
-    margin: 0 auto 30px auto;
+.big_sticker_placeholder:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
 }
 
-.gw-b {
-    width: 400px;
+.block_with_edit_buttons {
+    display: flex;
+    width: calc(55% - 10px);
+    flex-flow: column nowrap;
+}
+
+.help_button {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: left;
+    align-items: center;
+    background-color: #7A96AB;
+    height: 3.5em;
+    width: calc(100% - 18px);
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 8px;
+}
+
+.sticker_text_block {
+    width: calc(100% - 18px);
+    background-color: #2B4F7E;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 8px;
+    justify-content: left;
+}
+
+.sticker_text_header {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: left;
+}
+
+.sticker_text_block_with_input {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: left;
+}
+
+.to_gallery_button {
+    width: calc(100% - 18px);
+    height: 3.5em;
+    background-color: #2B4F7E;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: left;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 8px;
+}
+
+.input_field {
+    width: calc(100% - 30px);
     height: 50px;
-    margin:  0 auto;
+    border: none;
+    font-size: 25px;
+    margin: 10px 10px 10px 0;
 }
 
-@media only screen and (max-width: 1000px) {
-    .block {
-        width: 700px;
-        height: 700px;
-        margin-bottom: 60px;
-    }
+.input_field::placeholder {
+    color: #CBCBCB;
+}
 
-    .b-e {
-        height: 90px;
-        width: 90px;
-        margin: 10px;
-    }
+.magic_button {
+    display: flex;
+    width: 52px;
+    height: 52px;
+    max-width: 70%;
+    background-color: #A9C1C7;
+    margin: 10px 10px 10px 5px;
+}
 
-    .b-i {
-        width: 50px;
-        height: 50px;
-    }
+.delete_button {
+    background-color: #8D5D5D;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: left;
+    height: 3.5em;
+    width: calc(100% - 18px);
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    padding-left: 8px;
+}
 
-    .input-text-class {
-        width: 310px;
-    }
+.download_button {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0 10px 18px;
+    height: calc(100% - 20px);
+    flex: 6.5;
+    background-color: #5D8D76;
+    border: none;
+    font-size: 35px;
+    font-weight: bold;
+    font-style: normal;
+}
 
-    #input-text {
-        width: 310px;
-        font-size: 34px;
-    }
+.gallery_button {
+    font-size: 35px;
+    margin: 10px;
+    flex: 3.5;
+    height: calc(100% - 20px);
+    background-color: rgba(78, 129, 140, 0.47);
+    border: none;
+}
 
-    .text-type-2 {
-        font-family: "Montserrat Medium", sans-serif;
-        color: #FDEFF4;
-        font-size: 45px;
-    }
+.guides_button {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: 50px;
+    margin: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.guide_list {
+    margin-top: -15px;
+    margin-bottom: 15px;
+}
+
+.list_item {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding-left: 10px;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.clickable:hover {
+    cursor: pointer;
+    filter: brightness(0.9);
+}
+
+.lightbox {
+    display: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    background: rgba(51,51,51,0.8);
+    z-index: 2;
+}
+
+.lightbox_window {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: stretch;
+    width: 640px;
+    background-color: #2B4F7E;
+    margin: auto;
+    font-size: 30px;
+    z-index: 3;
+    padding: 20px;
+}
+
+.lightbox_text {
+    font-family: 'Onest', sans-serif;
+    font-weight: bold;
+    font-style: normal;
+    color: #A9C1C7;
+}
+
+.lightbox_close_button {
+    background-color: #91afd7;
+    display: flex;
+    width: 80%;
+    height: 50%;
 }
