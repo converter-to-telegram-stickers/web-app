@@ -1,7 +1,7 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const inputImage = document.getElementById('input');
-const inputLabel = document.getElementById('input-label');
+let inputLabel = document.getElementById('input-label');
 let imageText = document.getElementById('input-text');
 const image = new Image();
 let imageData = '';
@@ -29,6 +29,10 @@ canvas.addEventListener('wheel', mouseWheelEvent, {passive: false});
 
 function generateImageText(){
     imageText = "Hello world!";
+    inputLabel = "Hello world!";
+    text = "Hello world!";
+    if (dirty) update();
+    dirty = true;
 }
 
 inputImage.onchange = function() {
