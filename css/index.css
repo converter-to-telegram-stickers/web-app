@@ -428,3 +428,12 @@ a:hover {
     width: 80%;
     height: 50%;
 }
+
+.c-i {
+    display: grid;
+    margin: auto auto 50px auto;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fill, 300px);
+    width: 90%;
+    justify-content: center;
+}
