@@ -90,10 +90,11 @@ function drawCanvas() {
         ctx.setTransform(matrix[0], matrix[1], matrix[2], matrix[3], matrix[4], matrix[5]);
         ctx.drawImage(image, 0, 0);
         ctx.resetTransform();
-        ctx.font = 'bold 48px sans-serif';
-        ctx.fillStyle = '#000';
+        ctx.font = 'bold 38px sans-serif';
+        ctx.fillStyle = '#ffffff';
         ctx.textAlign = 'center';
-        ctx.fillText(text, canvas.width / 2, canvas.height - 40);
+        ctx.strokeStyle = '#000000';
+        ctx.fillText(text, canvas.width / 2, canvas.height - 30);
     }
     requestAnimationFrame(drawCanvas);
 }
