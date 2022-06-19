@@ -112,6 +112,7 @@ a:hover {
 #canvas {
     width: 45%;
     border: var(--border_width) solid #A9C1C7;
+    cursor: grab;
 }
 
 /* Стиль почти всего текста.
@@ -407,26 +408,31 @@ a:hover {
     flex-wrap: wrap;
     justify-content: center;
     align-content: stretch;
-    width: 640px;
+    width: 70%;
     background-color: #2B4F7E;
-    margin: auto;
-    font-size: 30px;
+    margin: 20% auto auto;
     z-index: 3;
-    padding: 20px;
+    padding: 15px;
 }
 
 .lightbox_text {
-    font-family: 'Onest', sans-serif;
-    font-weight: bold;
+    font-family: 'Onest';
+    font-weight: 500;
     font-style: normal;
+    font-size: 30px;
+    margin: 10px;
+    line-height: 95%;
     color: #A9C1C7;
 }
 
 .lightbox_close_button {
-    background-color: #91afd7;
+    font-size: 28px;
+    background-color: #9b5050;
     display: flex;
-    width: 80%;
-    height: 50%;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    height: 36px;
 }
 
 .c-i {
