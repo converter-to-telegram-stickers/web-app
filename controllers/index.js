@@ -6,7 +6,7 @@ let imageText = document.getElementById('input-text');
 const image = new Image();
 let imageData = '';
 
-const funnyLables = ["аниме", "добрый чел.", "ломай ломай", "всем интересно!", "смирись", "в нем заключено 6"];
+const funnyLables = ["аниме", "добрый чел.", "ломай ломай", "всем интересно!", "смирись", "в нем заключено 6", "это реально?"];
 
 requestAnimationFrame(drawCanvas);
 
@@ -24,10 +24,6 @@ canvas.addEventListener('mouseup', mouseEvent, {passive: true});
 canvas.addEventListener('mouseout', mouseEvent, {passive: true});
 
 canvas.addEventListener('wheel', mouseWheelEvent, {passive: false});
-
-// canvas.addEventListener('touchstart', mouseEvent);
-// canvas.addEventListener('touchmove', mouseEvent);
-// canvas.addEventListener('touchend', mouseEvent);
 
 function generateImageText(){
     let randomLabel = funnyLables[Math.floor(Math.random()*funnyLables.length)]
