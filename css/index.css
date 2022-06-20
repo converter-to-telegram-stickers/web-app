@@ -414,7 +414,7 @@ a:hover {
     align-content: stretch;
     width: 70%;
     background-color: #2B4F7E;
-    margin: 200px auto auto;
+    margin: auto;
     z-index: 3;
     padding: 15px;
 }
